@@ -1,0 +1,4 @@
+IdentityLogs
+| where TimeGenerated > ago(24h)
+| where Operation == "ConsentToApp"
+| project TimeGenerated, UserPrincipalName, AppDisplayName, Permission
