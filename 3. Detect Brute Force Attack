@@ -1,0 +1,6 @@
+SigninLogs
+| where TimeGenerated > ago(1h)
+| where ResultType != "0" // Filter for failed logins
+| summarize FailureCount = count(), UniqueUsers = dcount(UserPrincipalName) by IPAddress
+| where FailureCount > 5 // Set threshold for failed attempts
+| sort by FailureCount desc
