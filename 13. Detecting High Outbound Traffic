@@ -1,0 +1,5 @@
+NetworkLogs
+| where TimeGenerated > ago(1h)
+| summarize TotalBytes = sum(BytesSent) by SourceIP
+| where TotalBytes > 1000000000
+| order by TotalBytes desc
