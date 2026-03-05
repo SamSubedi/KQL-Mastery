@@ -1,0 +1,9 @@
+SigninLogs
+| where TimeGenerated > ago(24h)
+| where isnotempty(UserPrincipalName)
+| where IPAddress != ""
+| where RiskDetail has_any ("anonymousIP", "anonymizedIPAddress")
+   or RiskLevelDuringSignIn in ("medium", "high")
+| project TimeGenerated, UserPrincipalName, IPAddress, Location, 
+          RiskLevelDuringSignIn, RiskDetail
+| order by TimeGenerated desc
