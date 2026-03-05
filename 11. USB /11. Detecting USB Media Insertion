@@ -1,0 +1,3 @@
+DeviceEvents
+| where ActionType == "UsbDriveMounted"
+| project TimeGenerated, DeviceName, FileName, AccountName
