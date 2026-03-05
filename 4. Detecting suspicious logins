@@ -1,0 +1,1 @@
+SecurityEvent | where EventID == 4625 | summarize failed_attempts = count() by TargetUserName, bin(TimeGenerated, 1h) | where failed_attempts > 5
