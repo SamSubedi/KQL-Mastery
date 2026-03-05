@@ -1,0 +1,5 @@
+let MaliciousIPs = datatable(IP:string)["1.2.3.4","5.6.7.8"];
+NetworkLogs
+| where TimeGenerated > ago(24h)
+| where DestinationIP in (MaliciousIPs)
+| project TimeGenerated, SourceIP, DestinationIP, Protocol, Port
