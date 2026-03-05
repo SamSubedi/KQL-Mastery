@@ -1,0 +1,1 @@
+SecurityEvent | where EventID == 4624 | summarize unique_computers = dcount(Computer) by TargetUserName | where unique_computers > 3
