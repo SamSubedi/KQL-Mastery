@@ -1,0 +1,7 @@
+EmailEvents
+| where TimeGenerated > ago(1h)            // last 1 hour
+| where EmailDirection == "Outbound"       // only outgoing emails
+| summarize SentCount = count()            // count total emails per sender
+          by SenderFromAddress
+| where SentCount > 150                     // threshold for high volume
+| order by SentCount desc                  // highest senders on top
