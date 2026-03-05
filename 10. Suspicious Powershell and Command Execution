@@ -1,0 +1,5 @@
+DeviceEvents
+| where TimeGenerated > ago(24h)
+| where ProcessCommandLine contains "powershell" or ProcessCommandLine contains "cmd.exe"
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, ProcessCommandLine, AccountName
+| order by TimeGenerated desc
