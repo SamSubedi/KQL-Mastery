@@ -1,0 +1,4 @@
+OfficeActivity
+| where Operation == "New-InboxRule" or Operation == "Set-InboxRule"
+| where TimeGenerated > ago(24h)
+| project TimeGenerated, UserId, Operation, Parameters
