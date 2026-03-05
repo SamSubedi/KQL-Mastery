@@ -1,0 +1,7 @@
+let Blacklist = datatable(Domain:string)["bad.com","malicious.net","phish.org"];
+EmailEvents
+| where TimeGenerated > ago(24h)
+| where EmailDirection == "Outbound"
+| extend RecipientDomain = extract(@"@(.+)$",1,RecipientEmailAddress)
+| where RecipientDomain in (Blacklist)
+| project TimeGenerated, SenderFromAddress, RecipientEmailAddress, RecipientDomain, Subject
