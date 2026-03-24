@@ -1,0 +1,5 @@
+DeviceNetworkEvents
+| where InitiatingProcessFileName =~ "mshta.exe"
+| project Timestamp, DeviceName, RemoteIP, RemoteUrl, RemotePort,
+         InitiatingProcessCommandLine, InitiatingProcessAccountName
+| order by Timestamp desc
